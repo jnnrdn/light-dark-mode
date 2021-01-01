@@ -13,22 +13,21 @@ function imageMode(color) {
   image3.src = `img/undraw_conceptual_idea_${color}.svg`
 }
 
-// Dark Mode Styles
-function darkMode() {
-  nav.style.backgroundColor = 'rgb(0 0 0 / 50%)'
-  textBox.style.backgroundColor = 'rgb(255 255 255 / 50%)'
-  toggleIcon.children[0].textContent = 'Dark Mode'
-  toggleIcon.children[1].classList.replace('fa-sun', 'fa-moon')
-  imageMode('dark')
-}
+function toggleDarkLightMode(isDark) {
+  var navBkgColor = isDark ? 'rgb(0 0 0 / 50%)' : 'rgb(255 255 255 / 50%)'
+  var txtBoxBkgColor = isDark ? 'rgb(255 255 255 / 50%)' : 'rgb(0 0 0 / 50%)'
+  var toggleText = isDark ? 'Dark Mode' : 'Light Mode'
+  var toggleIconRemove = isDark ? 'fa-sun' : 'fa-moon'
+  var toggleIconAdd = isDark ? 'fa-moon' : 'fa-sun'
 
-// Light Mode Styles
-function lightMode() {
-  nav.style.backgroundColor = 'rgb(255 255 255 / 50%)'
-  textBox.style.backgroundColor = 'rgb(0 0 0 / 50%)'
-  toggleIcon.children[0].textContent = 'Light Mode'
-  toggleIcon.children[1].classList.replace('fa-moon', 'fa-sun')
-  imageMode('light')
+  nav.style.backgroundColor = `${navBkgColor}`
+  textBox.style.backgroundColor = `${txtBoxBkgColor}`
+  toggleIcon.children[0].textContent = `${toggleText}`
+  toggleIcon.children[1].classList.replace(
+    `${toggleIconRemove}`,
+    `${toggleIconAdd}`
+  )
+  isDark ? imageMode('dark') : imageMode('light')
 }
 
 // Switch Theme Dynamically
@@ -36,11 +35,11 @@ function switchTheme(event) {
   if (event.target.checked) {
     document.documentElement.setAttribute('data-theme', 'dark')
     localStorage.setItem('theme', 'dark')
-    darkMode()
+    toggleDarkLightMode(true)
   } else {
     document.documentElement.setAttribute('data-theme', 'light')
     localStorage.setItem('theme', 'light')
-    lightMode()
+    toggleDarkLightMode(false)
   }
 }
 
@@ -54,6 +53,6 @@ if (currentTheme) {
 
   if (currentTheme === 'dark') {
     toggleSwitch.checked = true
-    darkMode()
+    toggleDarkLightMode(true)
   }
 }
