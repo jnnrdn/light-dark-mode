@@ -13,7 +13,8 @@ function imageMode(color) {
   image3.src = `img/undraw_conceptual_idea_${color}.svg`
 }
 
-function toggleDarkLightMode(isDark) {
+function toggleDarkLightMode(mode) {
+  var isDark = mode === 'dark' ? mode : false
   var navBkgColor = isDark ? 'rgb(0 0 0 / 50%)' : 'rgb(255 255 255 / 50%)'
   var txtBoxBkgColor = isDark ? 'rgb(255 255 255 / 50%)' : 'rgb(0 0 0 / 50%)'
   var toggleText = isDark ? 'Dark Mode' : 'Light Mode'
@@ -35,11 +36,11 @@ function switchTheme(event) {
   if (event.target.checked) {
     document.documentElement.setAttribute('data-theme', 'dark')
     localStorage.setItem('theme', 'dark')
-    toggleDarkLightMode(true)
+    toggleDarkLightMode('dark')
   } else {
     document.documentElement.setAttribute('data-theme', 'light')
     localStorage.setItem('theme', 'light')
-    toggleDarkLightMode(false)
+    toggleDarkLightMode('light')
   }
 }
 
