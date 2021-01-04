@@ -5,6 +5,8 @@ const image1 = document.getElementById('image1')
 const image2 = document.getElementById('image2')
 const image3 = document.getElementById('image3')
 const textBox = document.getElementById('text-box')
+const DARK_THEME = 'dark'
+const LIGHT_THEME = 'light'
 
 // Dark or Light Images
 function imageMode(color) {
@@ -14,7 +16,7 @@ function imageMode(color) {
 }
 
 function toggleDarkLightMode(mode) {
-  var isDark = mode === 'dark' ? mode : false
+  var isDark = mode === DARK_THEME ? mode : false
   var navBkgColor = isDark ? 'rgb(0 0 0 / 50%)' : 'rgb(255 255 255 / 50%)'
   var txtBoxBkgColor = isDark ? 'rgb(255 255 255 / 50%)' : 'rgb(0 0 0 / 50%)'
   var toggleText = isDark ? 'Dark Mode' : 'Light Mode'
@@ -28,19 +30,19 @@ function toggleDarkLightMode(mode) {
     `${toggleIconRemove}`,
     `${toggleIconAdd}`
   )
-  isDark ? imageMode('dark') : imageMode('light')
+  isDark ? imageMode(DARK_THEME) : imageMode(LIGHT_THEME)
 }
 
 // Switch Theme Dynamically
 function switchTheme(event) {
   if (event.target.checked) {
-    document.documentElement.setAttribute('data-theme', 'dark')
-    localStorage.setItem('theme', 'dark')
-    toggleDarkLightMode('dark')
+    document.documentElement.setAttribute('data-theme', DARK_THEME)
+    localStorage.setItem('theme', DARK_THEME)
+    toggleDarkLightMode(DARK_THEME)
   } else {
-    document.documentElement.setAttribute('data-theme', 'light')
-    localStorage.setItem('theme', 'light')
-    toggleDarkLightMode('light')
+    document.documentElement.setAttribute('data-theme', LIGHT_THEME)
+    localStorage.setItem('theme', LIGHT_THEME)
+    toggleDarkLightMode(LIGHT_THEME)
   }
 }
 
@@ -52,7 +54,7 @@ const currentTheme = localStorage.getItem('theme')
 if (currentTheme) {
   document.documentElement.setAttribute('data-theme', currentTheme)
 
-  if (currentTheme === 'dark') {
+  if (currentTheme === DARK_THEME) {
     toggleSwitch.checked = true
     toggleDarkLightMode(true)
   }
